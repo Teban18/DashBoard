@@ -173,7 +173,7 @@
                             <div class="card-header"><i class="fas fa-table mr-1"></i>ZONAS WIFI GRATIS PARA LA GENTE - 20190331</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="table" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Numero</th>
@@ -186,7 +186,7 @@
                                                 
                                             </tr>
                                         </thead>
-                                        <tfoot>
+                                        <tbody id="table">
                                             <tr>
                                                 <th>Numero</th>
                                                 <th>Iniciativa</th>
@@ -196,7 +196,7 @@
                                                 <th>Departamento</th>
                                                 <th>Id_Zona_Wifi</th>
                                             </tr>
-                                        </tfoot>
+                                        </tbody>
                                         
                                     </table>
                                 </div>
@@ -208,21 +208,21 @@
                 <!--Petición Ajax-->
                 <script>
                     var listdata = [];
-                    $( window ).on(function(){
+                    $(document).ready(function(){
                         let table = document.getElementById('table');
                         $.ajax({
                             url: "https://www.datos.gov.co/resource/wsrw-hr5d.json",
                             type: "GET",
                             data: {
-                                "$limit" : 4000,
+                                "$limit" : 40,
                                 "$$app_token" : "bigcoTVa3pGdzuaJ4ar54QiMy"
                             }
-                        }).DONE(function(data) {
+                        }).done(function(data) {
                             for (const iterator of data) {
                                 if (iterator.no != undefined) {
-                                    table.innerHTML = table.innerHTML + 
+                                    table.innerHTML = table.innerHTML += 
                                     "<tr>" +
-                                        "<td>" + "hola" + "</td>" +
+                                        "<td>" + iterator.no + "</td>" +
                                         "<td>" + iterator.iniciativa + "</td>" +
                                         "<td>" + iterator.proyecto + "</td>" +
                                         "<td>" + iterator.operador + "</td>" +
